@@ -1,4 +1,4 @@
-resource "aws_lb" "main" {
+resource "aws_lb" "example_alb" {
   name               = "example_alb"
   internal           = false
   load_balancer_type = "application"
@@ -7,7 +7,7 @@ resource "aws_lb" "main" {
   enable_deletion_protection = false
 }
  
-resource "aws_alb_target_group" "main" {
+resource "aws_alb_target_group" "example_alb_target_group" {
   name        = "example_alb_target_group"
   port        = 80
   protocol    = "HTTP"
@@ -26,12 +26,12 @@ resource "aws_alb_target_group" "main" {
 }
 
 resource "aws_alb_listener" "http" {
-  load_balancer_arn = aws_lb.main.id
+  load_balancer_arn = aws_lb.example_alb.id
   port              = 80
   protocol          = "HTTP"
  
  default_action {
-    target_group_arn = example_alb_target_group.main.id
+    target_group_arn = aws_alb_target_group.example_alb_target_group.id
     type             = "forward"
   }
 }

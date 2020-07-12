@@ -7,6 +7,7 @@ resource "aws_cloudwatch_log_group" "example_cloudwatch_logger" {
 }
 
 resource "aws_ecs_task_definition" "example_task_def" {
+   family = "example-app"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
@@ -20,7 +21,7 @@ resource "aws_ecs_task_definition" "example_task_def" {
       "image": "${var.account_ecr}.dkr.ecr.${var.region}.amazonaws.com/example_app:latest",
       "portMappings": [
         {
-          protocol       : "tcp",
+          "protocol"       : "tcp",
           "containerPort": ${var.container_port},
           "hostPort"     : ${var.host_port}
         }

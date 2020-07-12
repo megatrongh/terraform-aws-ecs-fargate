@@ -13,7 +13,7 @@ variable "region" {
     default = "us-east-1"
 }
 
-variable "version" {
+variable "tfversion" {
     type    = string
     default = "~> 2.0"
 }

@@ -5,11 +5,13 @@ resource "aws_lb" "example_alb" {
   security_groups    = [aws_security_group.example_sg_alb.id]
   subnets            = aws_subnet.public.*.id
   enable_deletion_protection = false
+
+  depends_on = [aws_internet_gateway.example_gw]
 }
  
 resource "aws_alb_target_group" "example_alb_target_group" {
   name        = "example_alb_target_group"
-  port        = 80
+  port        = var.container_port
   protocol    = "HTTP"
   vpc_id      = aws_vpc.example_vpc.id
   target_type = "ip"
@@ -23,6 +25,7 @@ resource "aws_alb_target_group" "example_alb_target_group" {
    path                = var.health_check_path
    unhealthy_threshold = "2"
   }
+  depends_on = [aws_alb.example_alb]
 }
 
 resource "aws_alb_listener" "http" {
@@ -34,4 +37,8 @@ resource "aws_alb_listener" "http" {
     target_group_arn = aws_alb_target_group.example_alb_target_group.id
     type             = "forward"
   }
+}
+
+output "alb_url" {
+  value = "http://${aws_alb.example_alb.dns_name}"
 }

@@ -1,6 +1,6 @@
-variable "env_short" {
+variable "health_check_path" {
     type    = string
-    default = "dev"
+    default = "/health"
 }
 
 variable "cidr_block" {
@@ -18,18 +18,13 @@ variable "version" {
     default = "~> 2.0"
 }
 
-variable "account_ecr" {
-  type = string
-  default = "878925712923"
-}
-
 variable "container_port" {
   description = "The port where the Docker is exposed"
-  default     = 8000
+  default     = 3000
 }
 
 variable "host_port" {
-  default     = 8000
+  default     = 3000
 }
 
 variable "public_subnets" {

@@ -9,6 +9,7 @@ resource "aws_ecs_service" "example_ecs_service" {
  scheduling_strategy                = "REPLICA"
  
  network_configuration {
+   assign_public_ip = false
    security_groups  = [aws_security_group.example_sg_ecs_tasks.id]
    subnets          = aws_subnet.private.*.id
  }

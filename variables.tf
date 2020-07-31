@@ -20,7 +20,7 @@ variable "tfversion" {
 
 variable "container_port" {
   description = "The port where the Docker is exposed"
-  default     = 3000
+  default     = 80
 }
 
 variable "host_port" {

@@ -1,3 +1,4 @@
+
 resource "aws_ecs_service" "example_ecs_service" {
   name                               = "example_ecs_service"
   cluster                            = aws_ecs_cluster.example_ecs_cluster.id
@@ -16,7 +17,7 @@ resource "aws_ecs_service" "example_ecs_service" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.example_alb_target_group.arn
-    container_name   = "example-container"
+    container_name   = "example_container"
     container_port   = var.container_port
   }
 
@@ -24,3 +25,5 @@ resource "aws_ecs_service" "example_ecs_service" {
     ignore_changes = [task_definition, desired_count]
   }
 }
+
+

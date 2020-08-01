@@ -1,11 +1,10 @@
-resource "aws_lb" "example_alb" {
+resource "aws_lb" "example_ecs_service" {
   name                       = "example-alb"
   internal                   = false
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.example_sg_alb.id]
-  subnets                    = [aws_subnet.private.*.id, aws_subnet.public.*.id]
+  subnets                    = aws_subnet.public.*.id
   enable_deletion_protection = false
-
   depends_on = [aws_internet_gateway.example_gw]
 }
 
@@ -15,6 +14,7 @@ resource "aws_alb_target_group" "example_alb_target_group" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.example_vpc.id
   target_type = "ip"
+  # depends_on = ["aws_alb.example_ecs_service"]
 
   health_check {
     healthy_threshold   = "3"
@@ -28,7 +28,7 @@ resource "aws_alb_target_group" "example_alb_target_group" {
 }
 
 resource "aws_alb_listener" "http" {
-  load_balancer_arn = aws_lb.example_alb.id
+  load_balancer_arn = aws_lb.example_ecs_service.arn
   port              = 80
   protocol          = "HTTP"
 

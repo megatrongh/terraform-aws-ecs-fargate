@@ -1,6 +1,6 @@
 variable "health_check_path" {
   type    = string
-  default = "/health"
+  default = "/"
 }
 
 variable "cidr_block" {
@@ -20,7 +20,7 @@ variable "tfversion" {
 
 variable "container_port" {
   description = "The port where the Docker is exposed"
-  default     = 80
+  default     = 3000
 }
 
 variable "host_port" {
@@ -31,7 +31,8 @@ variable "public_subnets" {
   type = list
 
   default = [
-    "10.0.0.0/24"
+    "10.0.0.0/24",
+    "10.0.16.0/24"
   ]
 }
 

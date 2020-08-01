@@ -21,14 +21,14 @@ resource "aws_route_table" "example_private_route_table" {
   count  = length(var.private_subnets)
   vpc_id = aws_vpc.example_vpc.id
 }
- 
+
 resource "aws_route" "example_private_route" {
   count                  = length(compact(var.private_subnets))
   route_table_id         = element(aws_route_table.example_private_route_table.*.id, count.index)
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = element(aws_nat_gateway.example_nat_gw.*.id, count.index)
 }
- 
+
 resource "aws_route_table_association" "private" {
   count          = length(var.private_subnets)
   subnet_id      = element(aws_subnet.private.*.id, count.index)

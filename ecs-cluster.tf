@@ -7,14 +7,14 @@ resource "aws_cloudwatch_log_group" "example_cloudwatch_logger" {
 }
 
 resource "aws_ecs_task_definition" "example_task_def" {
-   family = "example-app"
+  family                   = "example-app"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
   memory                   = 512
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   task_role_arn            = aws_iam_role.ecs_task_role.arn
-  container_definitions = <<EOF
+  container_definitions    = <<EOF
   [
     {
       "name": "example_container",
@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "example_task_def" {
 }
 
 resource "aws_iam_role" "ecs_task_role" {
-  name = "ecs_task_role"
+  name               = "ecs_task_role"
   assume_role_policy = <<EOF
 {
  "Version": "2012-10-17",
@@ -59,7 +59,7 @@ EOF
 }
 
 resource "aws_iam_role" "ecs_task_execution_role" {
-  name = "ecs_task_execution_role"
+  name               = "ecs_task_execution_role"
   assume_role_policy = <<EOF
 {
  "Version": "2012-10-17",

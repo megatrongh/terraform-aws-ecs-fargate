@@ -6,7 +6,7 @@ resource "aws_internet_gateway" "example_gw" {
 # Create NAT gateway for private subnets
 resource "aws_eip" "example_nat" {
   count = length(var.private_subnets)
-  vpc = true
+  vpc   = true
 }
 
 resource "aws_nat_gateway" "example_nat_gw" {

@@ -1,10 +1,13 @@
-resource "aws_ecr_repository" "example_ecr_repo" {
-  name                 = "example-ecr-repo"
-  image_tag_mutability = "MUTABLE"
+resource "aws_ecr_repository" "example_app" {
+  name = "example-app"
+}
+
+resource "aws_ecr_repository" "universe_deploy" {
+  name = "universe/deploy"
 }
 
 resource "aws_ecr_lifecycle_policy" "example_ecr_lifecycle" {
-  repository = aws_ecr_repository.example_ecr_repo.name
+  repository = aws_ecr_repository.example_app.name
 
   policy = jsonencode({
     rules = [{

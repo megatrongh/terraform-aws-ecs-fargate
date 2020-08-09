@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "example_task_def" {
         "logDriver": "awslogs",
         "options": {
           "awslogs-region": "${var.region}",
-          "awslogs-group": "example-logs",
+          "awslogs-group": "${aws_cloudwatch_log_group.example_cloudwatch_logger.name}",
           "awslogs-stream-prefix": "ecs"
         }
       }

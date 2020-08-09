@@ -18,7 +18,7 @@ resource "aws_ecs_task_definition" "example_task_def" {
   [
     {
       "name": "example_container",
-      "image": "${var.account_ecr}.dkr.ecr.${var.region}.amazonaws.com/example_app:latest",
+      "image": "${var.account_ecr}.dkr.ecr.${var.region}.amazonaws.com/example-app:latest",
       "portMappings": [
         {
           "protocol"       : "tcp",
